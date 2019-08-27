@@ -34,8 +34,3 @@ Projects
 	located on SourceForge. This repository has been migrated to the
     [moist][] repository.
 
-
-[MySQLdb1]: https://github.com/farcepest/MySQLdb1
-[moist]: https://github.com/farcepest/moist
-[MySQLdb-svn]: https://sourceforge.net/p/mysql-python/svn/
-[MySQLdb2]: https://sourceforge.net/p/mysql-python/mysqldb-2/
