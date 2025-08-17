@@ -6,7 +6,9 @@ class Database {
 
     public function __construct($db_path = 'pragati.sqlite') {
         try {
-            $this->pdo = new PDO('sqlite:' . $db_path);
+            // Ensure the path is absolute to the project root
+            $absolute_db_path = __DIR__ . '/' . $db_path;
+            $this->pdo = new PDO('sqlite:' . $absolute_db_path);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             die("Database connection failed: " . $e->getMessage());
@@ -50,6 +52,28 @@ class Database {
                 product_id INTEGER NOT NULL,
                 PRIMARY KEY (plan_id, product_id),
                 FOREIGN KEY (plan_id) REFERENCES plans(id),
+                FOREIGN KEY (product_id) REFERENCES products(id)
+            )',
+            'CREATE TABLE IF NOT EXISTS admins (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT NOT NULL UNIQUE,
+                password TEXT NOT NULL
+            )',
+            'CREATE TABLE IF NOT EXISTS orders (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                customer_name TEXT NOT NULL,
+                customer_email TEXT NOT NULL,
+                total_price REAL NOT NULL,
+                status TEXT NOT NULL DEFAULT "pending",
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            )',
+            'CREATE TABLE IF NOT EXISTS order_items (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                order_id INTEGER NOT NULL,
+                product_id INTEGER NOT NULL,
+                quantity INTEGER NOT NULL,
+                price REAL NOT NULL,
+                FOREIGN KEY (order_id) REFERENCES orders(id),
                 FOREIGN KEY (product_id) REFERENCES products(id)
             )'
         ];

@@ -1,26 +1,42 @@
+:root {
+    --color-saffron: #f8a11e;
+    --color-turmeric: #fecb3e;
+    --color-brown: #4a2e19;
+    --color-off-white: #fdfaf3;
+    --color-white: #ffffff;
+    --color-light-gray: #eee;
+    --color-medium-gray: #ccc;
+    --color-dark-gray: #aaa;
+    --color-error-bg: #f8d7da;
+    --color-error-text: #721c24;
+    --color-success-bg: #d4edda;
+    --color-success-text: #155724;
+}
+
 /* General Body Styles */
 html {
-    scroll-padding-top: 70px; /* Adjust to match header height */
+    scroll-padding-top: 80px; /* Adjust to match header height */
 }
 
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 70px 0 0 0; /* Top padding to offset sticky header */
+    padding: 80px 0 0 0; /* Top padding to offset sticky header */
     line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: var(--color-off-white);
+    color: var(--color-brown);
 }
 
 /* Header and Navigation */
 header {
-    background: #333;
-    color: #fff;
+    background: var(--color-brown);
+    color: var(--color-white);
     padding: 1rem 0;
-    position: sticky;
+    position: fixed; /* Changed to fixed to be more reliable */
     top: 0;
     width: 100%;
     z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 nav {
@@ -32,9 +48,9 @@ nav {
     padding: 0 2rem;
 }
 
-nav .logo h1 {
-    margin: 0;
-    font-size: 1.5rem;
+nav .logo h1 a {
+    color: var(--color-white);
+    text-decoration: none;
 }
 
 nav .nav-links {
@@ -49,15 +65,40 @@ nav .nav-links li {
 }
 
 nav .nav-links a {
-    color: #fff;
+    color: var(--color-white);
     text-decoration: none;
     font-size: 1rem;
+    transition: color 0.2s ease-in-out;
+}
+
+nav .nav-links a:hover {
+    color: var(--color-turmeric);
 }
 
 nav .language-selector a {
-    color: #fff;
+    color: var(--color-white);
     text-decoration: none;
     margin: 0 5px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.cart-link {
+    color: var(--color-white);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    background-color: var(--color-saffron);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.cart-link:hover {
+    background-color: var(--color-turmeric);
+    color: var(--color-brown);
 }
 
 /* Main Content */
@@ -65,35 +106,59 @@ main {
     padding: 2rem;
     max-width: 1100px;
     margin: auto;
-    /* The body padding handles the top space now */
 }
 
+/* Hero Section (for Homepage) */
 #hero {
+    position: relative; /* Needed for absolute positioning of text */
     text-align: center;
-    padding: 4rem 0;
-    background: #fff;
+    padding: 0; /* Remove padding to let image fill the space */
+    background-color: var(--color-white);
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    overflow: hidden; /* Hide parts of image that overflow the rounded corners */
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-white);
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+    padding: 2rem;
     border-radius: 8px;
 }
 
 #hero h2 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     margin-bottom: 1rem;
+    color: var(--color-brown);
 }
 
-/* About and Featured Products Sections */
-#about, #featured-products {
-    background: #fff;
+/* General Section Styles */
+#about, #featured-products, #menu-page, #catering-page {
+    background: var(--color-white);
     padding: 2rem;
     margin-top: 2rem;
     border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
 }
 
-#about h3, #featured-products h3 {
+#about h3, #featured-products h3, #menu-page h2, #catering-page h2 {
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 1.5rem;
+    color: var(--color-brown);
 }
 
+/* Product Grid & Cards */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -101,33 +166,56 @@ main {
 }
 
 .product-card {
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-light-gray);
     border-radius: 8px;
-    padding: 1.5rem;
+    padding: 0; /* Remove padding to let image fill top */
     text-align: center;
-    background: #f9f9f9;
+    background: var(--color-off-white);
+    display: flex;
+    flex-direction: column;
+}
+
+.product-image {
+    width: 100%;
+    height: 200px; /* Fixed height for consistency */
+    object-fit: cover; /* Crop image to fit */
+    border-radius: 8px 8px 0 0; /* Rounded corners only at the top */
+}
+
+.product-card h4, .product-card p {
+    padding: 0 1.5rem; /* Add padding to text content instead */
+}
+
+.product-card h4 {
+    margin-top: 1rem;
+}
+
+.product-card p:last-child {
+    margin-bottom: 1.5rem;
 }
 
 .product-card h4 {
     margin-top: 0;
     font-size: 1.25rem;
+    color: var(--color-saffron);
 }
 
 /* Footer */
 footer {
     text-align: center;
-    padding: 1rem 0;
-    background: #333;
-    color: #fff;
+    padding: 2rem 0;
+    background: var(--color-brown);
+    color: var(--color-white);
     margin-top: 2rem;
 }
 
-/* Catering Form Styles */
+/* --- Form Styles --- */
 .catering-form {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
+    background: transparent; /* Form container itself is transparent now */
+    padding: 0;
+    border-radius: 0;
     margin-top: 2rem;
+    box-shadow: none;
 }
 
 .form-group {
@@ -148,38 +236,29 @@ footer {
 .form-group textarea {
     width: 100%;
     padding: .8rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-medium-gray);
     border-radius: 4px;
     box-sizing: border-box;
-}
-
-.product-checklist {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: .5rem;
-    background: #f9f9f9;
-    padding: 1rem;
-    border-radius: 4px;
-}
-
-.product-checklist label {
-    font-weight: normal;
+    background-color: var(--color-white);
+    color: var(--color-brown);
 }
 
 .btn {
     display: inline-block;
-    background: #333;
-    color: #fff;
+    background: var(--color-saffron);
+    color: var(--color-white);
     padding: .8rem 1.5rem;
     border: none;
     cursor: pointer;
     border-radius: 4px;
     font-size: 1rem;
     text-align: center;
+    transition: background-color 0.2s ease-in-out;
 }
 
 .btn:hover {
-    background: #555;
+    background: var(--color-turmeric);
+    color: var(--color-brown);
 }
 
 /* Form Messages */
@@ -189,21 +268,16 @@ footer {
     border-radius: 4px;
     text-align: center;
 }
-
 .message.success {
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    background-color: var(--color-success-bg);
+    color: var(--color-success-text);
 }
-
 .message.error {
-    background: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+    background-color: var(--color-error-bg);
+    color: var(--color-error-text);
 }
-
 .error {
-    color: #721c24;
+    color: var(--color-error-text);
     font-size: 0.9em;
 }
 
@@ -220,52 +294,47 @@ footer {
 
 .plan-card {
     display: block;
-    border: 2px solid #ddd;
+    border: 2px solid var(--color-light-gray);
     border-radius: 8px;
     padding: 1.5rem;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    background-color: var(--color-off-white);
 }
 
 .plan-card:hover {
-    border-color: #aaa;
+    border-color: var(--color-turmeric);
 }
 
 .plan-card input[type="radio"] {
-    display: none; /* Hide the radio button */
+    display: none;
 }
 
 .plan-card-content h4 {
     margin-top: 0;
     font-size: 1.5rem;
+    color: var(--color-saffron);
 }
 
 .plan-card-content ul {
     list-style: none;
     padding: 0;
     margin-top: 1rem;
-    color: #555;
+    color: var(--color-brown);
 }
 
 .plan-card-content ul li {
     padding: 0.25rem 0;
 }
 
-/* Style for the selected plan */
-.plan-card input[type="radio"]:checked + .plan-card-content {
-    /* The card itself is the label, so this won't work directly.
-       We need to style the label when the input is checked. */
-    /* Handled by styling the parent label instead. */
-}
-
 label.plan-card:has(input[type="radio"]:checked) {
-    border-color: #333;
-    background-color: #f9f9f9;
+    border-color: var(--color-saffron);
+    background-color: var(--color-white);
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 #details-form {
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--color-light-gray);
     margin-top: 2rem;
     padding-top: 2rem;
 }

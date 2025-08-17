@@ -56,4 +56,18 @@ return [
     'catering_choose_plan_title' => 'एक योजना चुनें',
     'plan_price_per_person' => 'प्रति व्यक्ति',
     'form_details_title' => 'अपना विवरण दर्ज करें',
+
+    // Cart
+    'cart_title' => 'शॉपिंग कार्ट',
+    'cart_empty' => 'आपकी कार्ट खाली है।',
+    'cart_continue_shopping' => 'खरीदारी जारी रखें',
+    'cart_product' => 'उत्पाद',
+    'cart_price' => 'कीमत',
+    'cart_quantity' => 'मात्रा',
+    'cart_subtotal' => 'उप-योग',
+    'cart_remove' => 'हटाएं',
+    'cart_update' => 'कार्ट अपडेट करें',
+    'cart_total' => 'कुल',
+    'cart_checkout' => 'चेकआउट के लिए आगे बढ़ें',
+    'add_to_cart' => 'कार्ट में डालें',
 ];

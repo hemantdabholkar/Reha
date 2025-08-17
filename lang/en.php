@@ -56,4 +56,18 @@ return [
     'catering_choose_plan_title' => 'Choose a Plan',
     'plan_price_per_person' => 'per person',
     'form_details_title' => 'Enter Your Details',
+
+    // Cart
+    'cart_title' => 'Shopping Cart',
+    'cart_empty' => 'Your cart is empty.',
+    'cart_continue_shopping' => 'Continue shopping',
+    'cart_product' => 'Product',
+    'cart_price' => 'Price',
+    'cart_quantity' => 'Quantity',
+    'cart_subtotal' => 'Subtotal',
+    'cart_remove' => 'Remove',
+    'cart_update' => 'Update Cart',
+    'cart_total' => 'Total',
+    'cart_checkout' => 'Proceed to Checkout',
+    'add_to_cart' => 'Add to Cart',
 ];
