@@ -1,0 +1,9 @@
+# Sensitive configuration
+config.php
+
+# Local development files
+/server.log
+/jules-scratch/
+
+# Database file
+pragati.sqlite

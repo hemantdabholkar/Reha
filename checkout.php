@@ -49,7 +49,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $pdo->commit();
 
-            // 3. Clear the cart and show success
+            // 3. Send invoice email
+            require_once 'lib/email.php';
+            $subject = "Your Pragati Mahila Udyog Order Confirmation (#" . $order_id . ")";
+
+            $email_body = "<h1>Thank you for your order!</h1>";
+            $email_body .= "<p>Hi " . htmlspecialchars($customer_name) . ",</p>";
+            $email_body .= "<p>We've received your order (#" . $order_id . ") and will start preparing it shortly.</p>";
+            $email_body .= "<h3>Order Summary:</h3><ul>";
+            foreach ($products_in_cart as $product) {
+                $quantity = $_SESSION['cart'][$product['id']];
+                $email_body .= "<li>" . htmlspecialchars($product['name']) . " (x" . $quantity . ")</li>";
+            }
+            $email_body .= "</ul>";
+            $email_body .= "<h4>Total: $" . number_format($total_price, 2) . "</h4>";
+            $email_body .= "<p>We will contact you separately regarding payment.</p>";
+
+            $email_sent = send_order_email($customer_email, $customer_name, $subject, $email_body);
+
+            // 4. Clear the cart and show success
             unset($_SESSION['cart']);
             $order_placed = true;
 
@@ -72,6 +90,9 @@ require_once 'header.php';
             <h3>Thank you for your order!</h3>
             <p>Your order has been placed successfully. Your order number is #<?php echo $order_id; ?>.</p>
             <p>We will contact you shortly to confirm the details.</p>
+            <?php if (!$email_sent): ?>
+                <p style="color: var(--color-error-text);">Note: We had trouble sending the confirmation email, but your order was received.</p>
+            <?php endif; ?>
             <p><a href="index.php">Return to Homepage</a></p>
         </div>
     <?php else: ?>
