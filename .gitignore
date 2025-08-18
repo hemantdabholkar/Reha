@@ -1,12 +1,9 @@
-*.pyc
-*.pyo
-*.o
-*.so
-*.pyd
-*.gz
-*.zip
-*.egg
-*.egg-info/
-.tox/
-build/
-dist/
+# Sensitive configuration
+config.php
+
+# Local development files
+/server.log
+/jules-scratch/
+
+# Database file
+pragati.sqlite
